@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR कोड जेनरेटर</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        #inputText {
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+        }
+        #generateButton {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        #qrCode {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR कोड जेनरेटर</h1>
+    <input type="text" id="inputText" placeholder="पाठ या URL दर्ज करें">
+    <br>
+    <button id="generateButton">QR कोड उत्पन्न करें</button>
+    <div id="qrCode"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.js"></script>
+    <script>
+        document.getElementById("generateButton").addEventListener("click", function() {
+            var inputValue = document.getElementById("inputText").value;
+            var qrCodeDiv = document.getElementById("qrCode");
+            qrCodeDiv.innerHTML = ""; // पिछले QR कोड को हटाएं
+            
+            var qr = qrcode(0, 'M');
+            qr.addData(inputValue);
+            qr.make();
+            
+            // जेनरेट किया गया QR कोड को डिव में जोड़ें
+            var qrImg = qr.createImgTag();
+            qrCodeDiv.innerHTML = qrImg;
+        });
+    </script>
+</body>
+</html>
